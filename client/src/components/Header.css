@@ -1,0 +1,91 @@
+/* client/src/components/Header.css */
+
+.main-header.uerj-theme {
+  background-color: var(--uerj-blue); /* Cor Azul UERJ */
+  color: white;
+  padding: 10px 30px; /* Um pouco menos de padding vertical */
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.header-content {
+  display: flex;
+  justify-content: space-between; /* Logo na esquerda, nav na direita */
+  align-items: center;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.header-logo {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: white;
+}
+
+.uerj-logo-img {
+  height: 45px; /* Ajuste o tamanho conforme sua logo */
+  width: auto;
+}
+
+/* --- ESTA É A CORREÇÃO PRINCIPAL --- */
+.header-nav {
+  display: flex;
+  flex-direction: row; /* Garante que fiquem lado a lado */
+  align-items: center;
+  gap: 15px; /* Espaço entre os itens */
+}
+
+/* --- ESTILO PADRÃO PARA TODOS OS LINKS/BOTÕES NA NAV --- */
+.header-nav .nav-link,
+.header-nav .logout-btn {
+  display: inline-flex; /* Permite ícones e texto lado a lado */
+  align-items: center;
+  gap: 8px;
+  
+  color: white;
+  text-decoration: none;
+  background: none; /* Remove qualquer fundo azul (como no botão "Aprovar") */
+  border: none;
+  
+  padding: 8px 15px;
+  border-radius: 6px;
+  
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 0.95rem;
+  
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+/* Efeito hover para todos */
+.header-nav .nav-link:hover,
+.header-nav .logout-btn:hover {
+  background-color: rgba(255, 255, 255, 0.15); /* Destaque sutil */
+}
+
+/* Estilo específico para o botão de admin (opcional, mas bom) */
+.header-nav .admin-link {
+  font-weight: 700;
+  background-color: rgba(255, 255, 255, 0.1); /* Destaque leve */
+}
+
+/* Responsividade para celular */
+@media (max-width: 768px) {
+  .main-header.uerj-theme {
+    padding: 10px 15px;
+  }
+  .uerj-logo-img {
+    height: 40px;
+  }
+  .header-nav .nav-link,
+  .header-nav .logout-btn {
+    padding: 6px 10px;
+    font-size: 0.9rem;
+  }
+  /* Opcional: Esconder o texto e mostrar só o ícone no admin */
+  .header-nav .admin-link span {
+    display: none; /* Esconde "Aprovar Usuários" no mobile */
+  }
+}
+

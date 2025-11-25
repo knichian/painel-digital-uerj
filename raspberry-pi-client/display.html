@@ -1,0 +1,218 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Painel UERJ - Hall</title>
+  <style>
+    html, body {
+      margin: 0; padding: 0; height: 100%; width: 100%;
+      overflow: hidden; background-color: black;
+      font-family: Arial, sans-serif; color: white;
+    }
+    #container { width: 100vw; height: 100vh; position: relative; }
+    #status {
+      position: absolute; bottom: 20px; left: 20px; z-index: 100;
+      background-color: rgba(0,0,0,0.5); padding: 10px;
+      border-radius: 5px; display: block;
+    }
+
+    .slide {
+      width: 100%; height: 100%; position: absolute;
+      top: 0; left: 0; opacity: 0;
+      transition: opacity 1.5s ease-in-out;
+      background-size: cover; background-position: center;
+      background-repeat: no-repeat;
+    }
+    .slide.active { opacity: 1; }
+    
+    /* --- NOVO: ESTILO PARA VÍDEO --- */
+    .slide video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover; /* Garante que o vídeo cubra a tela */
+    }
+
+    /* ... (Estilos do text-overlay continuam os mesmos) ... */
+    .text-overlay {
+      position: absolute; background: rgba(0, 0, 0, 0.7); color: white;
+      padding: 20px 30px; border-radius: 8px; max-width: 80%;
+      backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px);
+    }
+    .text-overlay p {
+      margin: 0; font-size: 3.5rem; line-height: 1.4; white-space: pre-wrap;
+    }
+    .position-bottom {
+      bottom: 5%; left: 50%; transform: translateX(-50%);
+      width: 90%; text-align: center;
+    }
+    .position-top {
+      top: 5%; left: 50%; transform: translateX(-50%);
+      width: 90%; text-align: center;
+    }
+    .position-center {
+      top: 50%; left: 50%; transform: translate(-50%, -50%);
+      text-align: center; font-size: 4.5rem;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="container"></div>
+  <div id="status">Carregando playlist...</div>
+
+  <script>
+    // --- (Configurações, Constantes... tudo igual) ---
+    const SERVER_BASE_URL = '172.20.129.190:3001'; 
+    const MONITOR_ID = 'hall-01';
+    const API_URL = `${SERVER_BASE_URL}/api/playlists/display/${MONITOR_ID}`;
+    const POLLING_INTERVAL = 60 * 1000;
+    
+    const container = document.getElementById('container');
+    const statusEl = document.getElementById('status');
+    let playlist = [];
+    let currentSlideIndex = 0;
+
+    function showStatus(message) {
+      statusEl.textContent = message;
+      statusEl.style.display = 'block';
+    }
+
+    async function fetchPlaylist() {
+      showStatus('Buscando playlist atualizada...');
+      try {
+        const response = await fetch(API_URL);
+        if (!response.ok) throw new Error(`Erro na API: ${response.statusText}`);
+        const data = await response.json();
+        
+        if (JSON.stringify(data) !== JSON.stringify(playlist)) {
+          console.log('Playlist atualizada. Recarregando slides.');
+          playlist = data;
+          buildSlides();
+          startCarousel();
+        }
+        statusEl.style.display = 'none';
+      } catch (error) {
+        console.error('Erro ao buscar playlist:', error);
+        showStatus('Erro de conexão. Tentando novamente em 30s...');
+        setTimeout(fetchPlaylist, 30000);
+      }
+    }
+
+    /* --- buildSlides() ATUALIZADA --- */
+    function buildSlides() {
+      container.innerHTML = '';
+      playlist.forEach((item, index) => {
+        // 1. Cria o container DIV para TODOS os tipos
+        const slide = document.createElement('div');
+        slide.className = 'slide';
+        slide.id = `slide-${index}`; // O carrossel procura por este ID
+
+        if (item.type === 'image') {
+          // Se for IMAGEM, define o background
+          slide.style.backgroundImage = `url(${SERVER_BASE_URL}${item.file_path})`;
+          
+          // Se tiver texto, adiciona o overlay
+          if (item.text_content) {
+            const position = item.text_overlay_position || 'bottom';
+            const overlay = document.createElement('div');
+            overlay.className = `text-overlay position-${position}`;
+            const text = document.createElement('p');
+            text.textContent = item.text_content;
+            overlay.appendChild(text);
+            slide.appendChild(overlay);
+          }
+        } 
+        else if (item.type === 'video') {
+          // Se for VÍDEO, cria a tag <video>
+          const video = document.createElement('video');
+          video.src = `${SERVER_BASE_URL}${item.file_path}`;
+          video.id = `video-${index}`; // ID para darmos play
+          video.muted = true; // Autoplay SÓ funciona se estiver mudo
+          video.playsInline = true;
+
+          // Quando o vídeo acabar, ele mesmo avança o slide
+          video.onended = () => {
+            console.log('Vídeo terminou, avançando...');
+            advanceToNext();
+          };
+          
+          slide.appendChild(video);
+        }
+        
+        container.appendChild(slide); // Adiciona o slide (imagem ou vídeo)
+      });
+    }
+
+    /* --- startCarousel() (igual) --- */
+    function startCarousel() {
+      console.log('Iniciando carrossel...');
+      if (playlist.length === 0) {
+        showStatus('Nenhuma playlist ativa encontrada.');
+        return;
+      }
+      currentSlideIndex = 0;
+      playNextSlide();
+    }
+    
+    /* --- playNextSlide() ATUALIZADA --- */
+    function playNextSlide() {
+      if (playlist.length === 0) return;
+      
+      console.log(`--- Exibindo SLIDE ${currentSlideIndex} ---`);
+
+      const item = playlist[currentSlideIndex];
+      const slideElement = document.getElementById(`slide-${currentSlideIndex}`);
+
+      if (!slideElement) {
+         console.log('Slide não encontrado, pulando...');
+         advanceToNext();
+         return;
+      }
+
+      // Mostra o slide (seja imagem ou vídeo)
+      document.querySelectorAll('.slide.active').forEach(s => s.classList.remove('active'));
+      slideElement.classList.add('active');
+      
+      // --- LÓGICA DE TEMPO ATUALIZADA ---
+      if (item.type === 'image') {
+        // Se for IMAGEM, usa o setTimeout com a duração definida
+        const durationMs = (item.duration_seconds || 10) * 1000;
+        console.log(`Slide IMAGEM ficará visível por ${durationMs / 1000} segundos.`);
+        setTimeout(advanceToNext, durationMs);
+      } 
+      else if (item.type === 'video') {
+        // Se for VÍDEO, dá play. O 'onended' cuidará de avançar.
+        const videoElement = document.getElementById(`video-${currentSlideIndex}`);
+        if (videoElement) {
+          console.log('Reproduzindo VÍDEO...');
+          videoElement.currentTime = 0; // Garante que o vídeo comece do início
+          videoElement.play().catch(e => {
+            console.error('Autoplay do vídeo falhou:', e);
+            advanceToNext(); // Se o play falhar, pula o slide
+          });
+        }
+      }
+    }
+
+    function advanceToNext() {
+      console.log('Avançando para o próximo slide...');
+      
+      // Para o vídeo anterior, se houver um
+      const lastItem = playlist[currentSlideIndex];
+      if (lastItem && lastItem.type === 'video') {
+        const lastVideo = document.getElementById(`video-${currentSlideIndex}`);
+        if (lastVideo) lastVideo.pause();
+      }
+      
+      currentSlideIndex = (currentSlideIndex + 1) % playlist.length;
+      playNextSlide();
+    }
+    /* --- FIM DAS FUNÇÕES DE LOOP --- */
+
+
+    // --- Início da Aplicação ---
+    fetchPlaylist();
+    setInterval(fetchPlaylist, POLLING_INTERVAL);
+  </script>
+</body>
+</html>

@@ -1,0 +1,12 @@
+# Dependências
+node_modules
+
+# Build de produção (será gerado no servidor)
+dist
+
+# Arquivos de ambiente locais
+.env
+.env.local
+
+# Logs
+npm-debug.log

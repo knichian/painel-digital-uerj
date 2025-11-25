@@ -1,0 +1,43 @@
+/* src/components/Header.css */
+
+.app-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 30px;
+  background-color: var(--uerj-blue-dark);
+  color: var(--uerj-white);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.logo-text {
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.project-logo {
+  font-style: italic;
+  opacity: 0.9;
+}
+
+.logout-button {
+  padding: 8px 16px;
+  background-color: transparent;
+  border: 1px solid var(--uerj-white);
+  color: var(--uerj-white);
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.logout-button:hover {
+  background-color: var(--uerj-white);
+  color: var(--uerj-blue-dark);
+}

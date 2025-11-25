@@ -1,0 +1,556 @@
+/* client/src/pages/PlaylistEditor.css */
+
+/* =========================================
+   1. LAYOUT GERAL
+========================================= */
+.playlist-page-layout {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--neutral-light);
+}
+
+.main-area {
+  flex: 1;
+  width: 100%;
+  max-width: 1000px; /* Um pouco mais largo para caber tudo */
+  margin: 0 auto;
+  padding: 40px 20px;
+  box-sizing: border-box;
+}
+
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 50vh;
+  font-size: 1.2rem;
+  color: var(--uerj-blue);
+  font-weight: 700;
+  font-family: var(--font-body);
+}
+
+/* =========================================
+   2. CABEÇALHO DA PÁGINA
+========================================= */
+.page-header-simple {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end; /* Alinha pela base do texto */
+  margin-bottom: 30px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.page-header-simple h1 {
+  color: var(--uerj-blue);
+  font-family: var(--font-title-slab);
+  font-size: 2.2rem;
+  margin: 10px 0 0 0;
+  line-height: 1.1;
+}
+
+.back-link-simple {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  text-decoration: none;
+  color: #666;
+  font-weight: 600;
+  font-size: 0.9rem;
+  margin-bottom: 5px;
+  transition: color 0.2s;
+}
+.back-link-simple:hover {
+  color: var(--uerj-blue);
+}
+
+/* Botão Principal de Adicionar Mídia */
+.add-media-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--uerj-blue);
+  color: #fff;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 8px;
+  font-weight: 700;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 0 4px 10px rgba(0, 114, 206, 0.2);
+}
+.add-media-btn:hover {
+  background: #0060b9;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(0, 114, 206, 0.3);
+}
+
+/* =========================================
+   3. LISTA DE PLAYLIST (CARDS)
+========================================= */
+.playlist-container {
+  background: transparent; /* Remove fundo branco do container pai */
+}
+
+.playlist-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.playlist-header h2 {
+  margin: 0;
+  font-family: var(--font-title-slab);
+  color: var(--neutral-dark);
+  font-size: 1.5rem;
+}
+
+.badge-pill {
+  background: #e9ecef;
+  color: var(--neutral-dark);
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-weight: 700;
+  font-size: 0.85rem;
+}
+
+/* Lista de Itens */
+.playlist-list-modern {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.playlist-item-modern {
+  display: flex;
+  align-items: center;
+  padding: 15px;
+  background: #fff;
+  border: 1px solid #eee;
+  border-radius: 12px;
+  transition: all 0.2s;
+  position: relative; /* Para posicionar elementos absolutos se necessário */
+}
+
+.playlist-item-modern:hover {
+  border-color: var(--uerj-blue);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+  transform: translateX(5px);
+}
+
+.item-index {
+  font-size: 1.1rem;
+  font-weight: 700;
+  font-family: var(--font-title-condensed);
+  color: #cbd5e0;
+  margin-right: 20px;
+  min-width: 25px;
+  text-align: center;
+}
+
+.playlist-item-modern img,
+.playlist-item-modern video {
+  width: 100px;
+  height: 65px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-right: 20px;
+  background-color: #f0f0f0;
+  border: 1px solid #f0f0f0;
+}
+
+.item-details {
+  flex: 1;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.item-name {
+  display: block;
+  font-weight: 700;
+  color: var(--neutral-dark);
+  font-size: 1.05rem;
+  margin-bottom: 6px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Wrapper dos controles (Duração + Calendário) */
+.item-controls-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+/* Input de Duração Editável */
+.item-meta-editable {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.9rem;
+  color: #666;
+  padding: 4px 8px;
+  border-radius: 6px;
+  background-color: #f8f9fa;
+  border: 1px solid transparent;
+  transition: all 0.2s;
+  cursor: text;
+}
+.item-meta-editable:hover {
+  border-color: #ddd;
+  background-color: #fff;
+}
+.item-meta-editable input {
+  width: 35px;
+  border: none;
+  background: transparent;
+  font-family: var(--font-body);
+  font-size: inherit;
+  font-weight: 700;
+  color: var(--uerj-blue);
+  text-align: right;
+  padding: 0;
+  outline: none;
+}
+/* Remove setinhas do input number */
+.item-meta-editable input::-webkit-outer-spin-button,
+.item-meta-editable input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+
+/* Grupo de Botões de Ação (Direita) */
+.item-action-buttons {
+  display: flex;
+  gap: 10px;
+  margin-left: 20px;
+}
+
+/* Botões de Ícone (Calendário, Lixeira) */
+.btn-icon,
+.delete-btn-modern {
+  background: #f0f2f5;
+  color: #666;
+  border: none;
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-icon:hover {
+  background: var(--uerj-gold);
+  color: white;
+}
+
+.delete-btn-modern:hover {
+  background: var(--uerj-red);
+  color: white;
+}
+
+/* Estado Ativo do Calendário (Quando tem data) */
+.btn-icon.btn-schedule.active {
+  background: var(--uerj-blue);
+  color: white;
+}
+.btn-icon.btn-schedule.active:hover {
+  background: #005aa0;
+}
+
+/* Estado Vazio */
+.empty-playlist-state {
+  text-align: center;
+  padding: 60px;
+  background: #fff;
+  border: 2px dashed #e0e0e0;
+  border-radius: 16px;
+}
+.empty-playlist-state p { margin: 0; color: #888; }
+.empty-playlist-state strong {
+  display: block;
+  color: var(--neutral-dark);
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+  font-family: var(--font-title-slab);
+}
+
+/* =========================================
+   4. MODAL DE MÍDIAS (Galeria)
+========================================= */
+.modal-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  animation: fadeIn 0.2s;
+}
+
+.modal-content {
+  background: #fff;
+  border-radius: 16px;
+  width: 90%;
+  max-width: 1100px;
+  height: 85vh;
+  display: flex;
+  flex-direction: column;
+  padding: 0; /* Header e Grid controlam padding */
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+  position: relative;
+  animation: slideUp 0.3s ease;
+  overflow: hidden;
+}
+
+.modal-header {
+  padding: 20px 30px;
+  border-bottom: 1px solid #eee;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #fff;
+}
+.modal-header h3 {
+  font-size: 1.4rem;
+  font-family: var(--font-title-slab);
+  color: var(--neutral-dark);
+  margin: 0;
+}
+.close-modal-btn {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: #999;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+.close-modal-btn:hover { color: var(--uerj-red); }
+
+.media-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 20px;
+  padding: 30px;
+  overflow-y: auto;
+  background-color: #f9f9f9;
+  flex-grow: 1;
+}
+
+.media-item {
+  background: #fff;
+  border: 1px solid #eee;
+  border-radius: 12px;
+  overflow: hidden;
+  transition: all 0.2s;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+}
+.media-item:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+  border-color: var(--uerj-gold);
+}
+
+.media-item img, .media-item video {
+  width: 100%;
+  height: 140px;
+  object-fit: cover;
+  background: #eee;
+}
+
+.media-info {
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex-grow: 1;
+}
+.media-info h4 {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #333;
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.add-btn-modal {
+  width: 100%;
+  background: var(--uerj-gold);
+  border: none;
+  color: white;
+  padding: 10px;
+  border-radius: 8px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-size: 0.9rem;
+  margin-top: auto; /* Empurra para o fundo */
+}
+.add-btn-modal:hover:not(:disabled) {
+  background: #d6a326;
+}
+.add-btn-modal.added {
+  background: #28a745;
+  cursor: default;
+}
+
+/* =========================================
+   5. MODAL DE AGENDAMENTO (Pequeno)
+========================================= */
+.schedule-modal-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(2px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 3000;
+  animation: fadeIn 0.2s;
+}
+
+.schedule-modal-content {
+  background: #fff;
+  border-radius: 16px;
+  padding: 30px;
+  width: 100%;
+  max-width: 400px;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+  animation: slideUp 0.2s ease;
+}
+
+.schedule-modal-content h4 {
+  font-family: var(--font-title-slab);
+  color: var(--uerj-blue);
+  margin-top: 0;
+  margin-bottom: 25px;
+  font-size: 1.3rem;
+  text-align: center;
+}
+
+.schedule-modal-content .form-group {
+  margin-bottom: 20px;
+}
+.schedule-modal-content label {
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 0.85rem;
+  color: #555;
+  margin-bottom: 8px;
+  display: block;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.schedule-modal-content input {
+  width: 100%;
+  padding: 12px;
+  border: 2px solid #eee;
+  border-radius: 8px;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  box-sizing: border-box;
+  transition: border 0.2s;
+}
+.schedule-modal-content input:focus {
+  outline: none;
+  border-color: var(--uerj-blue);
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+  margin-top: 30px;
+}
+.modal-actions button {
+  flex: 1;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  font-weight: 700;
+  cursor: pointer;
+  font-size: 1rem;
+}
+.btn-cancel {
+  background-color: #f0f2f5;
+  color: #555;
+}
+.btn-cancel:hover { background-color: #e4e6e9; }
+.btn-save {
+  background-color: var(--uerj-blue);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+.btn-save:hover { background-color: #005aa0; }
+
+/* =========================================
+   6. MENSAGENS (Toast)
+========================================= */
+.floating-message {
+  position: fixed;
+  top: 100px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--uerj-blue);
+  color: white;
+  padding: 12px 30px;
+  border-radius: 50px;
+  font-weight: 700;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+  z-index: 4000;
+  animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* Animações */
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes slideUp { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+@keyframes popIn { from { transform: translateX(-50%) scale(0.8); opacity: 0; } to { transform: translateX(-50%) scale(1); opacity: 1; } }
+
+/* =========================================
+   7. RESPONSIVIDADE
+========================================= */
+@media (max-width: 768px) {
+  .main-area { padding: 20px 15px; }
+  .page-header-simple {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 15px;
+  }
+  .page-header-simple h1 { font-size: 1.8rem; text-align: center; }
+  .add-media-btn { justify-content: center; }
+  
+  .playlist-item-modern {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .playlist-item-modern img {
+    width: 100%;
+    height: 150px;
+    margin: 0 0 15px 0;
+  }
+  .item-details { width: 100%; margin-bottom: 15px; }
+  .item-action-buttons { margin-left: 0; width: 100%; justify-content: flex-end; }
+  
+  .modal-content { width: 100%; height: 100%; border-radius: 0; }
+  .media-grid { grid-template-columns: 1fr 1fr; gap: 10px; padding: 15px; }
+}

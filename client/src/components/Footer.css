@@ -1,0 +1,20 @@
+/* client/src/components/Footer.css */
+
+.main-footer.uerj-theme {
+  background-color: var(--uerj-blue); /* Cor Azul UERJ */
+  color: white;
+  padding: 20px 30px;
+  text-align: center;
+  margin-top: 40px; /* Espaço entre o conteúdo e o footer */
+}
+
+.footer-content {
+  max-width: 1400px; /* Alinha com o conteúdo */
+  margin: 0 auto;
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+}
+
+.footer-content p {
+  margin: 0;
+}

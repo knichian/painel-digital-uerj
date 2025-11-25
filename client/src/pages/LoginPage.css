@@ -1,0 +1,170 @@
+/* client/src/pages/LoginPage.css */
+/* Este arquivo estiliza tanto a LoginPage quanto a RegisterPage */
+
+.login-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background-color: var(--neutral-light); /* Fundo da página */
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.login-container {
+  width: 100%;
+  max-width: 420px;
+  padding: 30px 40px 40px 40px;
+  background-color: var(--neutral-white);
+  border-radius: 16px; /* Mais arredondado */
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08); /* Sombra mais suave */
+  text-align: center;
+  border: 1px solid #eee;
+}
+
+/* Opcional: Adicione a logo da UERJ no seu JSX! */
+.login-logo {
+  width: 80px; /* Ajuste o tamanho da sua logo */
+  height: auto;
+  margin-bottom: 25px;
+}
+
+.login-header h1 {
+  font-family: var(--font-title-slab); /* Fonte de Título UERJ */
+  color: var(--uerj-blue); /* Cor Azul UERJ */
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 0 0 10px 0;
+}
+
+.login-header p {
+  color: var(--neutral-dark);
+  margin: 0;
+  font-size: 1rem;
+  font-family: var(--font-body);
+}
+
+.login-form {
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  text-align: left;
+}
+
+.login-form label {
+  font-family: var(--font-body);
+  font-weight: 700;
+  color: var(--neutral-dark);
+  font-size: 0.9rem;
+  margin-bottom: -10px; /* Aproxima a label do input */
+}
+
+.login-form input {
+  width: 100%;
+  padding: 14px 16px; /* Inputs mais altos e modernos */
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-sizing: border-box;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  transition: all 0.2s ease;
+}
+
+.login-form input:focus {
+  outline: none;
+  border-color: var(--uerj-blue); /* Foco na cor da UERJ */
+  box-shadow: 0 0 0 3px rgba(0, 114, 206, 0.2); /* Brilho suave */
+}
+
+/* Botão de Submit com a marca UERJ */
+.login-form button[type="submit"] {
+  width: 100%;
+  padding: 15px;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 1rem;
+  color: white;
+  background-color: var(--uerj-blue); /* Cor Azul UERJ */
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 15px rgba(0, 114, 206, 0.2);
+}
+
+.login-form button[type="submit"]:hover {
+  background-color: #005aa0; /* Azul mais escuro */
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 114, 206, 0.3);
+}
+
+/* Links (Ex: "Criar conta") */
+.toggle-link {
+  margin-top: 25px;
+  font-size: 0.9rem;
+  color: #555;
+  font-family: var(--font-body);
+}
+
+.toggle-link a {
+  color: var(--uerj-blue); /* Cor Azul UERJ */
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.toggle-link a:hover {
+  text-decoration: underline;
+}
+
+/* Mensagens de Alerta (Erro e Sucesso) */
+.error-message,
+.success-message {
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  text-align: center;
+  padding: 12px;
+  border-radius: 8px;
+  font-weight: 500;
+  margin: 0;
+}
+
+.error-message {
+  color: var(--uerj-red); /* Cor Vermelha UERJ */
+  background-color: #fddede;
+  border: 1px solid #f9c0c0;
+}
+
+.success-message {
+  color: #0f5132;
+  background-color: #d1e7dd;
+  border: 1px solid #badbcc;
+}
+
+/* --- NOVO: ESTILOS DO OLHINHO DE SENHA --- */
+
+/* 1. O container do input/label precisa ser relativo */
+.password-wrapper {
+  position: relative;
+}
+
+/* 2. Adicionamos espaço no input para o ícone */
+.login-form .password-wrapper input {
+  padding-right: 45px; /* Espaço para o ícone não sobrepor o texto */
+}
+
+/* 3. Posicionamos o ícone */
+.password-toggle-icon {
+  position: absolute;
+  top: 50%; /* Alinha verticalmente com o input */
+  right: 15px;
+  transform: translateY(10px); /* Ajuste fino para descer (já que a label está em cima) */
+  
+  color: #888;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.password-toggle-icon:hover {
+  color: var(--uerj-blue);
+}

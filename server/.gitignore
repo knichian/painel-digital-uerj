@@ -1,0 +1,12 @@
+# Dependências do Node 
+node_modules
+
+# Arquivos de ambiente (SENHAS REAIS - NUNCA ENVIE)
+.env
+
+# Logs de erro
+npm-debug.log
+
+# Pasta de uploads (não queremos enviar suas imagens de teste)
+public/uploads/*
+!public/uploads/.gitkeep

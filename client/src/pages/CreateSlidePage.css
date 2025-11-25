@@ -1,0 +1,231 @@
+/* client/src/pages/CreateSlidePage.css */
+
+.create-slide-page.dashboard-content {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.create-slide-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* 50/50, mais equilibrado */
+  gap: 30px;
+  align-items: start;
+}
+
+/* --- COLUNA DO FORMULÁRIO --- */
+.form-column {
+  background: var(--neutral-white);
+  padding: 25px 30px;
+  border-radius: 16px;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+}
+.form-column h2 {
+  font-family: var(--font-title-slab);
+  color: var(--neutral-dark);
+  margin-top: 0;
+  margin-bottom: 20px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+  display: flex; flex-direction: column; gap: 8px;
+}
+.form-group label {
+  font-weight: 700;
+  color: var(--neutral-dark);
+  font-family: var(--font-body);
+}
+.form-group textarea,
+.form-group select,
+.form-group input[type="number"] {
+  padding: 12px 14px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  resize: vertical;
+  background: #fff;
+  transition: all 0.2s;
+}
+.form-group textarea:focus,
+.form-group select:focus,
+.form-group input[type="number"]:focus {
+  outline: none;
+  border-color: var(--uerj-blue);
+  box-shadow: 0 0 0 3px rgba(0,114,206,0.2);
+}
+
+.form-group-row {
+  display: flex;
+  gap: 15px;
+  align-items: flex-end;
+}
+.form-group-row .form-group { flex: 1; }
+.char-count { text-align: right; color: #666; font-size: 0.8rem; }
+.center-text { text-align: center; }
+
+/* Input de Arquivo */
+.file-input-hidden {
+  width: 0.1px; height: 0.1px; opacity: 0; overflow: hidden;
+  position: absolute; z-index: -1;
+}
+.file-input-label {
+  padding: 12px 20px;
+  font-weight: 700;
+  font-family: var(--font-body);
+  color: var(--uerj-blue);
+  background-color: #e6f7ff;
+  border: 2px dashed var(--uerj-blue);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-align: center;
+}
+.file-input-label:hover {
+  background-color: #d0ebf9;
+}
+
+/* Info Box da Playlist Ativa */
+.info-box {
+  background-color: #e6f7ff;
+  border-left: 5px solid var(--uerj-blue);
+  padding: 15px 20px;
+  border-radius: 8px;
+  margin-bottom: 25px;
+}
+.info-box p {
+  margin: 0 0 5px 0;
+  font-family: var(--font-body);
+  color: var(--neutral-dark);
+}
+.info-box strong {
+  font-family: var(--font-title-slab);
+  color: var(--uerj-blue);
+  font-size: 1.1rem;
+}
+.info-box .error-text {
+  color: var(--uerj-red);
+}
+
+/* Botão de Submit */
+.submit-button-brand {
+  width: 100%;
+  margin-top: 10px;
+  padding: 14px 20px;
+  font-size: 1rem;
+  font-weight: 700;
+  font-family: var(--font-body);
+  color: white;
+  background-color: var(--uerj-blue);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 0 4px 15px rgba(0,114,206,0.2);
+}
+.submit-button-brand:hover:not(:disabled) {
+  background-color: #005aa0;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0,114,206,0.3);
+}
+.submit-button-brand:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+
+/* --- O PREVIEW --- */
+.preview-column {
+  position: sticky; 
+  top: 30px;
+}
+.preview-column h2 {
+  font-family: var(--font-title-slab);
+  color: var(--neutral-dark);
+}
+.monitor-preview {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background-color: black;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+  border: 10px solid #333;
+  position: relative;
+}
+.empty-preview {
+  width: 100%; height: 100%;
+  display: flex; justify-content: center; align-items: center;
+  color: #555; background: #eee;
+  font-family: var(--font-body);
+}
+.slide-preview {
+  width: 100%; height: 100%;
+  background-size: cover; background-position: center;
+  position: relative;
+}
+
+/* --- ESTILOS DO OVERLAY DE TEXTO --- */
+.text-overlay {
+  position: absolute;
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 20px 30px;
+  border-radius: 8px;
+  max-width: 80%;
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+}
+.text-overlay p {
+  margin: 0;
+  font-size: 1.2rem;
+  line-height: 1.4;
+  white-space: pre-wrap;
+  font-family: var(--font-body);
+}
+.position-bottom {
+  bottom: 30px; left: 50%; transform: translateX(-50%);
+  width: 90%; text-align: center;
+}
+.position-top {
+  top: 30px; left: 50%; transform: translateX(-50%);
+  width: 90%; text-align: center;
+}
+.position-center {
+  top: 50%; left: 50%; transform: translate(-50%, -50%);
+  text-align: center; font-size: 1.5rem;
+}
+.floating-message {
+  position: fixed; top: 80px; left: 50%; transform: translateX(-50%);
+  background: var(--uerj-blue); color: white; padding: 10px 25px;
+  border-radius: 30px; font-weight: 700; box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+  z-index: 1000;
+}
+
+/* =========================================
+   RESPONSIVIDADE (MOBILE)
+========================================= */
+@media (max-width: 900px) {
+  .create-slide-layout {
+    grid-template-columns: 1fr; /* Empilha */
+  }
+  .preview-column {
+    position: relative;
+    top: 0;
+    margin-top: 20px;
+  }
+  .monitor-preview {
+    border-width: 5px;
+  }
+  .text-overlay p {
+    font-size: 1.0rem;
+  }
+  .position-center {
+    font-size: 1.2rem;
+  }
+  .form-group-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}

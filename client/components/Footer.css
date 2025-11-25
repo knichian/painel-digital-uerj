@@ -1,0 +1,19 @@
+/* src/components/Footer.css */
+
+.app-footer {
+  padding: 20px;
+  background-color: var(--uerj-blue-slate);
+  color: var(--uerj-white);
+  text-align: center;
+  margin-top: auto; /* Empurra o rodapé para o final da página */
+}
+
+.app-footer a {
+  color: var(--uerj-gray-light);
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.app-footer a:hover {
+  text-decoration: underline;
+}

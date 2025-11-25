@@ -1,0 +1,277 @@
+/* client/src/pages/DashboardPage.css */
+
+.modern-dash {
+  padding: 30px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* --- BARRA DE AÇÕES RÁPIDAS --- */
+.action-bar {
+  background: var(--neutral-white);
+  padding: 20px 25px;
+  border-radius: 12px;
+  margin-bottom: 30px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+.action-bar h2 {
+  font-family: var(--font-title-condensed);
+  font-size: 1.5rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--uerj-blue);
+  margin: 0 0 15px 0;
+}
+.action-buttons {
+  display: flex;
+  flex-wrap: wrap; /* Permite que os botões quebrem a linha no mobile */
+  gap: 15px;
+}
+.action-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 20px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 0.9rem;
+  cursor: pointer;
+  border: none;
+  transition: all 0.2s;
+}
+.slide-btn {
+  background-color: var(--uerj-gold);
+  color: white;
+}
+.slide-btn:hover { background-color: #c99a25; transform: translateY(-2px); }
+.upload-btn {
+  background-color: #eef2f7;
+  color: var(--neutral-dark);
+  border: 2px dashed #b0c4de;
+}
+.upload-btn:hover { background-color: #dbe6f3; }
+.submit-btn {
+  background-color: #28a745;
+  color: white;
+}
+
+/* --- MENSAGEM FLUTUANTE --- */
+.floating-message {
+  position: fixed; top: 80px; left: 50%; transform: translateX(-50%);
+  background: var(--neutral-dark); color: white; padding: 10px 25px;
+  border-radius: 30px; font-weight: bold; box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+  z-index: 1000;
+}
+
+/* --- LAYOUT DE GRID --- */
+.dashboard-grid-one-column { /* Nova classe para o grid de playlists */
+  display: grid;
+  grid-template-columns: 1fr; /* Apenas uma coluna */
+  gap: 30px; /* Espaço entre a section de playlist e outros cards */
+  margin-bottom: 30px; /* Espaço entre a seção de playlists e a galeria */
+}
+
+.modern-card {
+  background-color: var(--neutral-white);
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+.modern-card h2 {
+  font-family: var(--font-title-slab);
+  margin-top: 0;
+  margin-bottom: 25px;
+}
+
+/* --- SEÇÃO PLAYLISTS --- */
+.playlist-form-modern {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 30px;
+}
+.playlist-form-modern input {
+  flex-grow: 1;
+  padding: 10px 12px;
+  border: 2px solid #eee;
+  border-radius: 8px;
+  font-family: var(--font-body);
+  font-size: 1rem;
+}
+.playlist-form-modern input:focus {
+  outline: none;
+  border-color: var(--uerj-blue);
+}
+.submit-btn-brand {
+  background-color: var(--uerj-blue);
+  color: white;
+  border: none;
+  width: 45px;
+  height: 45px;
+  border-radius: 8px;
+  font-size: 1.5rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.submit-btn-brand:hover { background-color: #005aa0; }
+
+.playlist-list-modern h3 {
+  font-size: 1rem;
+  font-family: var(--font-body);
+  font-weight: 700;
+  color: #777;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 10px;
+}
+
+.playlist-item-dash {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+  border-radius: 8px;
+  border: 2px solid transparent;
+  transition: all 0.2s;
+}
+.playlist-item-dash:hover { background-color: #fcfcfc; }
+.playlist-item-dash.active {
+  background-color: #e6f7ff;
+  border-color: var(--uerj-blue);
+}
+
+.playlist-name {
+  font-family: var(--font-body);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--neutral-dark);
+  text-decoration: none;
+}
+.playlist-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.active-badge {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  background-color: #28a745;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+.btn-action {
+  background: none; border: none; cursor: pointer; padding: 5px;
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.2s;
+}
+.btn-activate {
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 0.85rem;
+  color: var(--uerj-blue);
+}
+.btn-activate:hover { color: #005aa0; }
+.btn-delete { color: #aaa; }
+.btn-delete:hover { color: var(--uerj-red); transform: scale(1.1); }
+
+/* --- SEÇÃO GALERIA --- */
+.gallery-section-full-width { /* Nova classe para a galeria */
+    /* Basicamente usa as mesmas propriedades do .modern-card */
+    background-color: var(--neutral-white);
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+
+.gallery-grid-dash {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); /* Um pouco maior */
+  gap: 20px; /* Mais espaço entre as imagens */
+  max-height: 65vh; /* Se tiver muitas imagens, pode rolar */
+  overflow-y: auto;
+  padding-right: 10px; /* Para não cortar a scrollbar */
+}
+.gallery-item-dash {
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  border: 1px solid #eee; /* Adiciona uma borda leve */
+}
+.gallery-item-dash img {
+  width: 100%; height: 120px; object-fit: cover; display: block;
+}
+.gallery-item-dash .item-title {
+  padding: 8px;
+  font-size: 0.8rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin: 0;
+  background: var(--neutral-white);
+  font-weight: 500;
+  color: #555;
+}
+.btn-delete-media {
+  position: absolute; top: 5px; right: 5px;
+  width: 28px; height: 28px; background-color: var(--uerj-red);
+  color: white; border: none; border-radius: 50%;
+  font-size: 1.2rem; font-weight: bold; line-height: 28px; /* Ajuste para centralizar X */
+  cursor: pointer; opacity: 0; transition: all 0.2s;
+  display: flex; align-items: center; justify-content: center; /* Centraliza o X */
+  z-index: 10;
+}
+.gallery-item-dash:hover .btn-delete-media { opacity: 1; }
+
+/* --- RESPONSIVIDADE --- */
+@media (max-width: 900px) {
+  .dashboard-grid {
+    grid-template-columns: 1fr; /* Empilha as colunas */
+  }
+  .modern-dash { padding: 15px; }
+  .action-bar { padding: 15px; }
+}
+
+/* --- MENSAGEM FLUTUANTE (Toast) --- */
+.floating-message {
+  position: fixed; /* Fica flutuando sobre a página */
+  top: 90px; /* Logo abaixo do header */
+  left: 50%;
+  transform: translateX(-50%);
+  
+  background-color: var(--uerj-blue); /* Cor Azul UERJ */
+  color: white;
+  
+  padding: 12px 25px;
+  border-radius: 30px; /* Formato de pílula */
+  
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 0.95rem;
+  
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  
+  /* Animação de entrada */
+  animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* Animação para a mensagem aparecer */
+@keyframes popIn {
+  from {
+    top: 50px;
+    opacity: 0;
+    transform: translateX(-50%) scale(0.8);
+  }
+  to {
+    top: 90px;
+    opacity: 1;
+    transform: translateX(-50%) scale(1);
+  }
+}

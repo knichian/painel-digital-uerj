@@ -1,0 +1,41 @@
+/* client/src/index.css */
+
+/* --- 1. IMPORTANDO AS FONTES (Alternativas Gratuitas) --- */
+@import url('https://fonts.googleapis.com/css2?family=Fira+Sans:wght@400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&display=swap');
+
+/* --- 2. DEFININDO AS CORES DA UERJ --- */
+:root {
+  /* Fontes */
+  --font-body: 'Fira Sans', sans-serif;
+  --font-title-slab: 'Roboto Slab', serif;
+  --font-title-condensed: 'Oswald', sans-serif;
+
+  /* Cores UERJ */
+  --uerj-blue: #0072CE;
+  --uerj-gold: #AD841F;
+  --uerj-red: #F9423A;
+
+  /* Cores Neutras (baseadas na sua paleta original) */
+  --neutral-dark: #2A4D69; /* Antigo uerj-blue-dark */
+  --neutral-light: #f8f9fa; /* Fundo mais claro */
+  --neutral-white: #ffffff;
+  --neutral-text: #333;
+}
+
+/* --- 3. ESTILOS BASE --- */
+body {
+  margin: 0;
+  font-family: var(--font-body); /* Aplica Fira Sans no site todo */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--neutral-light);
+  color: var(--neutral-text);
+}
+
+/* Títulos usarão a fonte Slab */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-title-slab);
+  color: var(--neutral-dark);
+}
