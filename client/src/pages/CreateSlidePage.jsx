@@ -27,7 +27,7 @@ function CreateSlidePage() {
     if (!token) return;
     try {
       // 1. Descobre o ID da playlist ativa
-      const activeRes = await axios.get('http://localhost:3001/api/monitors/hall-01/active', {
+      const activeRes = await axios.get('/api/monitors/hall-01/active', {
         headers: { Authorization: `Bearer ${token}` },
       });
       
@@ -35,7 +35,7 @@ function CreateSlidePage() {
 
       if (activeId) {
         // 2. Se existe uma, busca os detalhes dela (para pegar o nome)
-        const playlistRes = await axios.get(`http://localhost:3001/api/playlists/${activeId}`, {
+        const playlistRes = await axios.get(`/api/playlists/${activeId}`, {
            headers: { Authorization: `Bearer ${token}` },
         });
         setActivePlaylist(playlistRes.data); // Salva o objeto { id, name, ... }
@@ -85,7 +85,7 @@ function CreateSlidePage() {
 
     try {
       // ETAPA 1: Fazer o upload da nova mídia
-      const uploadResponse = await axios.post('http://localhost:3001/api/media/upload', formData, {
+      const uploadResponse = await axios.post('/api/media/upload', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
           Authorization: `Bearer ${token}`,
@@ -97,7 +97,7 @@ function CreateSlidePage() {
 
       // ETAPA 2: Adiciona o novo slide DIRETAMENTE à playlist ativa
       await axios.post(
-        `http://localhost:3001/api/playlists/${activePlaylist.id}/items`,
+        `/api/playlists/${activePlaylist.id}/items`,
         {
           media_item_id: newMediaId,
           duration: parseInt(duration) || 30

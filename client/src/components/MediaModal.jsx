@@ -49,7 +49,7 @@ const MediaModal = ({ isOpen, onClose, onAddMedia, playlistItems }) => {
             {mediaList.length > 0 ? (
               mediaList.map((media) => {
                 const title = media.title || media.name || 'Sem título';
-                const src = media.file_path ? `http://localhost:3001${media.file_path}` : media.url;
+                const src = media.file_path || media.url;
                 const isAdded = addedMediaIds.has(Number(media.id));
 
                 return (

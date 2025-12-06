@@ -29,7 +29,7 @@ function DashboardPage() {
   const fetchActivePlaylistId = useCallback(async () => {
     if (!token) return;
     try {
-      const res = await axios.get('http://localhost:3001/api/monitors/hall-01/active', {
+      const res = await axios.get('/api/monitors/hall-01/active', {
         headers: { Authorization: `Bearer ${token}` },
       });
       setActivePlaylistId(res.data.activePlaylistId);
@@ -46,7 +46,7 @@ function DashboardPage() {
   const fetchMedia = useCallback(async () => {
     if (!token) return;
     try {
-      const response = await axios.get('http://localhost:3001/api/media', {
+      const response = await axios.get('/api/media', {
         headers: { Authorization: `Bearer ${token}` },
       });
       setMediaItems(response.data);
@@ -63,7 +63,7 @@ function DashboardPage() {
   const fetchPlaylists = useCallback(async () => {
     if (!token) return;
     try {
-      const response = await axios.get('http://localhost:3001/api/playlists', {
+      const response = await axios.get('/api/playlists', {
         headers: { Authorization: `Bearer ${token}` },
       });
       setPlaylists(response.data);
@@ -112,7 +112,7 @@ function DashboardPage() {
     formData.append('title', file.name);
 
     try {
-      await axios.post('http://localhost:3001/api/media/upload', formData, {
+      await axios.post('/api/media/upload', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
           Authorization: `Bearer ${token}`,
@@ -142,7 +142,7 @@ function DashboardPage() {
     }
     setMessage('');
     try {
-      await axios.post('http://localhost:3001/api/playlists',
+      await axios.post('/api/playlists',
         { name: newPlaylistName },
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -159,7 +159,7 @@ function DashboardPage() {
   const handleDeleteMedia = async (mediaId) => {
     if (!window.confirm('Tem certeza que deseja excluir esta mídia? Ela será removida de todas as playlists.')) return;
     try {
-      await axios.delete(`http://localhost:3001/api/media/${mediaId}`, {
+      await axios.delete(`/api/media/${mediaId}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       fetchMedia();
@@ -174,7 +174,7 @@ function DashboardPage() {
   const handleDeletePlaylist = async (playlistId) => {
     if (!window.confirm('Tem certeza que deseja excluir esta playlist?')) return;
     try {
-      await axios.delete(`http://localhost:3001/api/playlists/${playlistId}`, {
+      await axios.delete(`/api/playlists/${playlistId}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       fetchPlaylists();
@@ -189,7 +189,7 @@ function DashboardPage() {
   const handleActivatePlaylist = async (playlistId) => {
     if (!window.confirm('Deseja definir esta playlist como a principal do monitor?')) return;
     try {
-      await axios.post(`http://localhost:3001/api/playlists/${playlistId}/activate`,
+      await axios.post(`/api/playlists/${playlistId}/activate`,
         { monitor_id: 1 },
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -303,7 +303,7 @@ function DashboardPage() {
                   >
                     &times;
                   </button>
-                  <img src={`http://localhost:3001${item.file_path}`} alt={item.title} />
+                  <img src={item.file_path} alt={item.title} />
                   <p className="item-title" title={item.title}>{item.title}</p>
                 </div>
               ))

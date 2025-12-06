@@ -94,7 +94,7 @@ function PlaylistItem({ item, index, onRemove, onUpdateDuration, onOpenSchedule 
     <div className="playlist-item-modern">
       <div className="item-index">{index + 1}</div>
       <img
-        src={`http://localhost:3001${item.file_path}`}
+        src={item.file_path}
         alt={item.title}
         className={isVideo ? 'video-thumb' : ''}
       />
