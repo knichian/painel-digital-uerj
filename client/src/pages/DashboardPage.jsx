@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import axios from 'axios';
+// import axios from 'axios';
+import axios from '../lib/axiosClient'
 import { FaTrashAlt, FaPlay, FaPaintBrush } from 'react-icons/fa';
 import { IoMdCloudUpload } from "react-icons/io";
 
