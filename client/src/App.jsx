@@ -11,7 +11,7 @@ import AdminPage from './pages/AdminPage';
 
 function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/painel-digital-uerj">
       <Routes>
   {/* Quando o usuário acessar /login, mostramos a LoginPage */}
   <Route path="/login" element={<LoginPage />} />

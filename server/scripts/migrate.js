@@ -1,10 +1,49 @@
-const db = require('../config/db');
+// const db = require('../config/db');
+const { Client } = require('pg');
+const { Pool } = require('pg');
+require('dotenv').config();
+
+const bcrypt = require('bcryptjs');
+
+async function createDatabase() {
+
+    console.log('');
+    console.log('### createDatabase:');
+    console.log('');
+
+    const client = new Client({
+      connectionString: process.env.TEMP_CON_URL,
+    });
+
+    await client.connect();
+
+    try {
+        await client.query('CREATE DATABASE painel_uerj;');
+        console.log('"painel_uerj" criada');
+        await client.end();
+    } catch { 
+        console.log('"painel_uerj" já existe');
+        await client.end();
+    }
+
+    console.log('');
+
+}
 
 async function createTables() {
   try {
+    console.log('');
+    console.log('### createTables:');
+    console.log('');
+
     console.log('Iniciando migração...');
 
     // Tabelas existentes
+
+    const db = new Pool({
+      connectionString: process.env.DATABASE_URL,
+    });
+
     await db.query(`
       CREATE TABLE IF NOT EXISTS users (
         id SERIAL PRIMARY KEY,
@@ -12,7 +51,8 @@ async function createTables() {
         email TEXT UNIQUE NOT NULL,
         password_hash TEXT NOT NULL,
         role TEXT NOT NULL DEFAULT 'editor',
-        created_at TIMESTAMP DEFAULT now()
+        created_at TIMESTAMP DEFAULT now(),
+        is_approved BOOLEAN DEFAULT false
       );
     `);
     console.log('Tabela "users" verificada/criada.');
@@ -79,6 +119,8 @@ async function createTables() {
       );
     `);
     console.log('Tabela "monitor_playlists" verificada/criada.');
+    
+    db.end();
 
     console.log('Migração concluída com sucesso.');
   } catch (err) {
@@ -86,4 +128,7 @@ async function createTables() {
   }
 }
 
-createTables();
+(async () => {
+    await createDatabase();
+    await createTables();
+})();

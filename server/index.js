@@ -12,11 +12,15 @@ const playlistRoutes = require('./routes/playlists'); // 1. IMPORTE A ROTA
 const monitorRoutes = require('./routes/monitorRoutes'); // 1. IMPORTE A ROTA
 const adminRoutes = require('./routes/adminRoutes'); // 1. IMPORTE A ROTA DE ADMIN
 
+// Gabriel: importando .env
+require('dotenv').config();
+
 // 2. Cria uma instância do Express
 const app = express();
 
 // 3. Define a porta em que o servidor vai rodar
-const PORT = 3001; // Usamos 3001 para não conflitar com o React (que usa 3000)
+// Gabriel: definindo a porta pelo .env
+const PORT = process.env.PORT
 
 // --- Middlewares ---
 // Habilita o CORS para permitir requisições do frontend
@@ -24,23 +28,38 @@ app.use(cors());
 // Habilita o Express para entender requisições com corpo em formato JSON
 app.use(express.json());
 
+// Gabriel: criando um Router para adicionar o prefixo do projeto a todas as rodas do backend
+projectPrefix = express.Router()
+projectPrefixName = 'painel-digital-uerj' // Gabriel: Prefixo do projeto para integração ao Cloudhub
+
+// Gabriel: Prefixo para diferenciar chamadas para o Backend das para o Frontend
+backendPrefix = express.Router()
+backendPrefixName = 'api'
+
 // 2. NOVO: SERVINDO ARQUIVOS ESTÁTICOS
 // Isso torna a pasta 'public' acessível. Se você salvar uma imagem como
 // 'public/uploads/imagem.webp', ela estará disponível em http://localhost:3001/uploads/imagem.webp
-app.use(express.static(path.join(__dirname, 'public')));
+// Gabriel: modificando servidor estatico para funcionar com prefixo do projeto
+// Gabriel: exemplo, o caminho 'public/uploads/image.jpg' mapeia para a rota '/painel-digital-uerj/api/uploads/image.jpg' agora
+backendPrefix.use(express.static(path.join(__dirname, 'public')));
 
 // --- Rotas ---
-app.get('/', (req, res) => {
-  res.json({ message: 'API do Painel UERJ está no ar!' });
-});
 
 // Diz ao Express para usar nossas rotas de autenticação
 // Todas as rotas definidas em 'auth.js' terão o prefixo '/api/auth'
-app.use('/api/auth', authRoutes);
-app.use('/api/media', mediaRoutes); // 3. USE AS NOVAS ROTAS
-app.use('/api/playlists', playlistRoutes); // 2. USE A NOVA ROTA
-app.use('/api/monitors', monitorRoutes); // 2. USE A NOVA ROTA
-app.use('/api/admin', adminRoutes); // 2. USE A ROTA DE ADMIN
+// Gabriel: modificando para usar prefixo do projeto
+backendPrefix.get('/', (req, res) => {
+    res.json({ message: 'API do Painel UERJ está no ar!' });
+});
+backendPrefix.use('/auth', authRoutes);
+backendPrefix.use('/media', mediaRoutes); // 3. USE AS NOVAS ROTAS
+backendPrefix.use('/playlists', playlistRoutes); // 2. USE A NOVA ROTA
+backendPrefix.use('/monitors', monitorRoutes); // 2. USE A NOVA ROTA
+backendPrefix.use('/admin', adminRoutes); // 2. USE A ROTA DE ADMIN
+
+// Gabriel: integração dos prefixos as rotas
+projectPrefix.use(`/${backendPrefixName}`, backendPrefix);
+app.use(`/${projectPrefixName}`, projectPrefix);
 
 app.listen(PORT, () => {
   console.log(`Servidor rodando na porta ${PORT}`);
