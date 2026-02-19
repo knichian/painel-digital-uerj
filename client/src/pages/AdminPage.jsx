@@ -18,7 +18,9 @@ function AdminPage() {
   // Função para buscar usuários pendentes
   const fetchPendingUsers = useCallback(async () => {
     try {
-      const res = await axios.get('/api/admin/pending');
+      const res = await axios.get('/api/admin/pending', {
+        headers: { Authorization: `Bearer ${token}` },
+      });
       setPendingUsers(res.data);
     } catch (error) {
       console.error('Erro ao buscar usuários:', error);
@@ -46,7 +48,11 @@ function AdminPage() {
 
   const handleApprove = async (userId) => {
     try {
-      await axios.patch(`/api/admin/approve/${userId}`);
+      const headers = { 
+          "Authorization": `Bearer ${token}` 
+      };
+      await axios.patch(`/api/admin/approve/${userId}`, '', {headers});
+
       setMessage('Usuário aprovado!');
       fetchPendingUsers(); // Atualiza a lista
     } catch (error) {
@@ -59,7 +65,9 @@ function AdminPage() {
   const handleDeny = async (userId) => {
     if (!window.confirm('Tem certeza que deseja negar e excluir este usuário?')) return;
     try {
-      await axios.delete(`/api/admin/deny/${userId}`);
+      await axios.delete(`/api/admin/deny/${userId}`, {
+          headers: { Authorization: `Bearer ${token}` },
+      });
       setMessage('Usuário negado e excluído.');
       fetchPendingUsers(); // Atualiza a lista
     } catch (error) {

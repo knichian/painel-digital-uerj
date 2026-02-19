@@ -13,19 +13,18 @@ function App() {
   return (
     <BrowserRouter basename="/painel-digital-uerj">
       <Routes>
-  {/* Quando o usuário acessar /login, mostramos a LoginPage */}
-  <Route path="/login" element={<LoginPage />} />
-
-  {/* Quando o usuário acessar a rota principal, mostramos o Dashboard */}
-  <Route path="/" element={<DashboardPage />} />
-
-  {/* Nova rota de registro */}
-  <Route path="/register" element={<RegisterPage />} />
-  <Route path="/contato" element={<ContactPage />} /> {/* 2. ADICIONE A ROTA */}
-  {/* 2. ADICIONE A NOVA ROTA DINÂMICA */}
-  <Route path="/playlist/:id" element={<PlaylistEditor />} />
-  <Route path="/create-slide" element={<CreateSlidePage />} />
-  <Route path="/admin" element={<AdminPage />} />
+        {/* Quando o usuário acessar /login, mostramos a LoginPage */}
+        <Route path="/login" element={<LoginPage />} />
+        {/* Quando o usuário acessar a rota principal, mostramos o Dashboard */}
+        <Route path="/" element={<DashboardPage />} />
+        {/* Nova rota de registro */}
+        <Route path="/register" element={<RegisterPage />} />
+        <Route path="/contato" element={<ContactPage />} />{" "}
+        {/* 2. ADICIONE A ROTA */}
+        {/* 2. ADICIONE A NOVA ROTA DINÂMICA */}
+        <Route path="/playlist/:id" element={<PlaylistEditor />} />
+        <Route path="/create-slide" element={<CreateSlidePage />} />
+        <Route path="/admin" element={<AdminPage />} />
       </Routes>
     </BrowserRouter>
   );
