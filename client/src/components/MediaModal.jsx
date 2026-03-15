@@ -11,8 +11,9 @@ const MediaModal = ({ isOpen, onClose, onAddMedia, playlistItems }) => {
   useEffect(() => {
     if (isOpen) {
       setLoading(true);
+      const token = localStorage.getItem('token');
       axios
-        .get('/api/media')
+        .get('/api/media', { headers: { Authorization: `Bearer ${token}` } })
         .then((res) => setMediaList(res.data))
         .catch((err) => console.error('Erro ao buscar mídias:', err))
         .finally(() => setLoading(false));
