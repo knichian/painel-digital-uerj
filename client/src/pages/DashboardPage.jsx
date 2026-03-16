@@ -9,6 +9,8 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import './DashboardPage.css';
 
+const projectPrefixName = 'painel-digital-uerj';
+
 function DashboardPage() {
   const navigate = useNavigate();
   const token = localStorage.getItem('token');
@@ -113,7 +115,7 @@ function DashboardPage() {
     formData.append('title', file.name);
 
     try {
-      await axios.post('/api/media/upload', formData, {
+      await axios.post('/api/media/uploads', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
           Authorization: `Bearer ${token}`,
@@ -203,6 +205,8 @@ function DashboardPage() {
     setTimeout(() => setMessage(''), 3000);
   };
 
+  
+
   // --- 5. RENDERIZAÇÃO DO JSX ---
 
   return (
@@ -259,7 +263,7 @@ function DashboardPage() {
                     key={playlist.id} 
                     className={`playlist-item-dash ${playlist.id === activePlaylistId ? 'active' : ''}`}
                   >
-                    <Link to={`/playlist/${playlist.id}`} className="playlist-name">
+                    <Link to={`/playlists/${playlist.id}`} className="playlist-name">
                       {playlist.name}
                     </Link>
                     <div className="playlist-controls">
@@ -304,7 +308,7 @@ function DashboardPage() {
                   >
                     &times;
                   </button>
-                  <img src={item.file_path} alt={item.title} />
+                  <img src={`/${projectPrefixName}/api/${item.file_path}`} alt={item.title} />
                   <p className="item-title" title={item.title}>{item.title}</p>
                 </div>
               ))

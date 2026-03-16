@@ -22,7 +22,7 @@ function App() {
         <Route path="/contato" element={<ContactPage />} />{" "}
         {/* 2. ADICIONE A ROTA */}
         {/* 2. ADICIONE A NOVA ROTA DINÂMICA */}
-        <Route path="/playlist/:id" element={<PlaylistEditor />} />
+        <Route path="/playlists/:id" element={<PlaylistEditor />} />
         <Route path="/create-slide" element={<CreateSlidePage />} />
         <Route path="/admin" element={<AdminPage />} />
       </Routes>

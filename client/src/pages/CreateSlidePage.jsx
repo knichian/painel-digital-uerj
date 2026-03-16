@@ -85,7 +85,7 @@ function CreateSlidePage() {
 
     try {
       // ETAPA 1: Fazer o upload da nova mídia
-      const uploadResponse = await axios.post('/api/media/upload', formData, {
+      const uploadResponse = await axios.post('/api/media/uploads', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
           Authorization: `Bearer ${token}`,
@@ -109,7 +109,7 @@ function CreateSlidePage() {
 
       // Envia o usuário direto para a playlist que ele acabou de editar
       setTimeout(() => {
-        navigate(`/playlist/${activePlaylist.id}`);
+        navigate(`/playlists/${activePlaylist.id}`);
       }, 1500);
 
     } catch (error) {

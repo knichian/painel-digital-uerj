@@ -6,6 +6,8 @@ import Header from '../components/Header';
 import MediaModal from '../components/MediaModal';
 import './PlaylistEditor.css';
 
+const projectPrefixName = 'painel-digital-uerj';
+
 // --- SUBCOMPONENTE: MODAL DE AGENDAMENTO ---
 function ScheduleModal({ item, onClose, onSave }) {
   const formatDateTimeLocal = (isoString) => {
@@ -94,7 +96,7 @@ function PlaylistItem({ item, index, onRemove, onUpdateDuration, onOpenSchedule 
     <div className="playlist-item-modern">
       <div className="item-index">{index + 1}</div>
       <img
-        src={item.file_path}
+        src={`/${projectPrefixName}/api/${item.file_path}`}
         alt={item.title}
         className={isVideo ? 'video-thumb' : ''}
       />
