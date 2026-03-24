@@ -6,12 +6,13 @@ export default defineConfig({
   plugins: [react()],
   server: {
     proxy: {
-      
-      '/api': {
+      '/painel-digital-uerj/api': {
         target: 'http://localhost:3001',
         changeOrigin: true,
         secure: false,
       }
-    }
-  }
+    },
+    allowedHosts: true,
+  },
+  base: '/painel-digital-uerj',
 })
