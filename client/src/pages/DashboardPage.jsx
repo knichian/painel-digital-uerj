@@ -9,6 +9,8 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import './DashboardPage.css';
 
+const projectPrefixName = 'painel-digital-uerj';
+
 function DashboardPage() {
   const navigate = useNavigate();
   const token = localStorage.getItem('token');
@@ -304,7 +306,7 @@ function DashboardPage() {
                   >
                     &times;
                   </button>
-                  <img src={item.file_path} alt={item.title} />
+                  <img src={`/${projectPrefixName}/api/${item.file_path}`} alt={item.title} />
                   <p className="item-title" title={item.title}>{item.title}</p>
                 </div>
               ))

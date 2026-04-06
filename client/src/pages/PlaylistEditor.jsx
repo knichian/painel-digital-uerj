@@ -1,10 +1,12 @@
-﻿import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import axios from '../lib/axiosClient';
 import { FaTrash, FaClock, FaPlus, FaCalendarAlt, FaSave } from 'react-icons/fa';
 import Header from '../components/Header';
 import MediaModal from '../components/MediaModal';
 import './PlaylistEditor.css';
+
+const projectPrefixName = 'painel-digital-uerj';
 
 // --- SUBCOMPONENTE: MODAL DE AGENDAMENTO ---
 function ScheduleModal({ item, onClose, onSave }) {
@@ -94,7 +96,7 @@ function PlaylistItem({ item, index, onRemove, onUpdateDuration, onOpenSchedule 
     <div className="playlist-item-modern">
       <div className="item-index">{index + 1}</div>
       <img
-        src={item.file_path}
+        src={`/${projectPrefixName}/api/${item.file_path}`}
         alt={item.title}
         className={isVideo ? 'video-thumb' : ''}
       />

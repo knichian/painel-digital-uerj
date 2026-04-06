@@ -53,12 +53,14 @@ const MediaModal = ({ isOpen, onClose, onAddMedia, playlistItems }) => {
                 const src = media.file_path || media.url;
                 const isAdded = addedMediaIds.has(Number(media.id));
 
+                const projectPrefixName = 'painel-digital-uerj' // Gabriel: Prefixo do projeto para integração ao Cloudhub
+
                 return (
                   <div className="media-item" key={media.id}>
                     {media.type === 'video' ? (
                       <video src={src} className="media-thumb-vid" muted loop playsInline />
                     ) : (
-                      <img src={src} alt={title} className="media-thumb-img" />
+                      <img src={`/${projectPrefixName}/api/${src}`} alt={title} className="media-thumb-img" />
                     )}
                     <div className="media-info">
                       <h4>{title}</h4>
