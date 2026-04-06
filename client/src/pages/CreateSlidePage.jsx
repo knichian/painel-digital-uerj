@@ -109,7 +109,7 @@ function CreateSlidePage() {
 
       // Envia o usuário direto para a playlist que ele acabou de editar
       setTimeout(() => {
-        navigate(`/playlist/${activePlaylist.id}`);
+        navigate(`/playlists/${activePlaylist.id}`);
       }, 1500);
 
     } catch (error) {

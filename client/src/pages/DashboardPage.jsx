@@ -261,7 +261,7 @@ function DashboardPage() {
                     key={playlist.id} 
                     className={`playlist-item-dash ${playlist.id === activePlaylistId ? 'active' : ''}`}
                   >
-                    <Link to={`/playlist/${playlist.id}`} className="playlist-name">
+                    <Link to={`/playlists/${playlist.id}`} className="playlist-name">
                       {playlist.name}
                     </Link>
                     <div className="playlist-controls">
