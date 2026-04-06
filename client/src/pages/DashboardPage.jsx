@@ -115,7 +115,7 @@ function DashboardPage() {
     formData.append('title', file.name);
 
     try {
-      await axios.post('/api/media/upload', formData, {
+      await axios.post('/api/media/uploads', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
           Authorization: `Bearer ${token}`,

@@ -85,7 +85,7 @@ function CreateSlidePage() {
 
     try {
       // ETAPA 1: Fazer o upload da nova mídia
-      const uploadResponse = await axios.post('/api/media/upload', formData, {
+      const uploadResponse = await axios.post('/api/media/uploads', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
           Authorization: `Bearer ${token}`,
