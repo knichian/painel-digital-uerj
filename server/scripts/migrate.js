@@ -132,7 +132,39 @@ async function createTables() {
   }
 }
 
+async function createAdmin() {
+  try {
+
+    console.log('Criando usuario admin padrão')
+    /* INSERT 
+    INTO "users" ("id", "name", "email", "password_hash", "role", "created_at", "is_approved") 
+    VALUES (
+    3,'admin','admin@localhost.local','$2b$10$U3FS0o1.0dZhC/pQUejbMurrGPRT2nxHG6HMHvfhcKoUbgDpVBKyK','admin','2026-03-15 09:49:53.137000','true');  */
+    
+    
+    const db = new Pool({
+      connectionString: process.env.DATABASE_URL,
+    });
+
+    const insert_string = `
+      INSERT INTO "users" 
+        ("id", "name", "email", "password_hash", "role", "created_at", "is_approved") 
+        VALUES (3,'admin','admin@localhost.local','$2b$10$U3FS0o1.0dZhC/pQUejbMurrGPRT2nxHG6HMHvfhcKoUbgDpVBKyK','admin','2026-03-15 09:49:53.137000','true');
+    `
+    await db.query(insert_string);
+
+    db.end();
+
+    console.log("Admin padrão criado com sucesso!")
+    console.log("E-mail: admin@localhost.local")
+
+  } catch (err) {
+    console.error('Erro durante a criação do usuario admin:', err);
+  }
+}
+
 (async () => {
     await createDatabase();
     await createTables();
+    await createAdmin();
 })();
