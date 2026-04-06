@@ -65,7 +65,9 @@ async function createTables() {
         type TEXT NOT NULL,
         title TEXT,
         duration_seconds INTEGER DEFAULT 10,
-        created_at TIMESTAMP DEFAULT now()
+        created_at TIMESTAMP DEFAULT now(),
+        text_content text,
+        text_overlay_position text NOT NULL
       );
     `);
     console.log('Tabela "media_items" verificada/criada.');
@@ -103,7 +105,9 @@ async function createTables() {
         media_item_id INTEGER REFERENCES media_items(id) ON DELETE CASCADE,
         position INTEGER NOT NULL, -- Ordem (0, 1, 2, 3...)
         duration_seconds INTEGER, -- Opcional: sobrescreve a duração padrão
-        created_at TIMESTAMP DEFAULT now()
+        created_at TIMESTAMP DEFAULT now(),
+        start_at TIMESTAMP,
+        end_at TIMESTAMP
       );
     `);
     console.log('Tabela "playlist_items" verificada/criada.');
