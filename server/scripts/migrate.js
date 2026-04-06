@@ -163,8 +163,34 @@ async function createAdmin() {
   }
 }
 
+async function hotfixes() {
+  /* adicionando um monitor "dummy" para o funcionamento das playlists */
+  try {
+
+    const db = new Pool({
+      connectionString: process.env.DATABASE_URL,
+    });
+
+    const insert_string = `
+      INSERT INTO "monitors" 
+        ("name", "identifier", "api_key", "created_at")
+        VALUES ('main-monitor', 'hall-01', '', NOW());
+    `;
+    await db.query(insert_string);
+    
+    db.end();
+    
+    console.log('');
+    console.log("Hotfix bem sucedido!");
+
+  } catch (err) {
+    console.error(`Erro em hofixe: ${err}`)
+  }
+}
+
 (async () => {
     await createDatabase();
     await createTables();
     await createAdmin();
+    await hotfixes();
 })();
