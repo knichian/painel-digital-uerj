@@ -46,7 +46,7 @@ exports.uploadMedia = async (req, res) => {
       await fs.writeFile(filePath, file.buffer);
     }
 
-    const relativePath = `/uploads/${fileName}`;
+    const relativePath = `uploads/${fileName}`;
     const title = req.body.title || file.originalname; // Pega o título ou usa o nome do arquivo
 
     const insertQuery = `

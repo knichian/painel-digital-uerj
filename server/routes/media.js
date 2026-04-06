@@ -16,7 +16,7 @@ const upload = multer({ storage: storage });
 // 1. 'protect': Garante que o usuário está logado.
 // 2. 'upload.single('image')': Processa um único arquivo que virá no campo 'image'.
 // 3. 'mediaController.uploadMedia': Nossa função que redimensiona e salva (agora suporta vídeo).
-router.post('/upload', protect, upload.single('image'), mediaController.uploadMedia);
+router.post('/uploads', protect, upload.single('image'), mediaController.uploadMedia);
 
 
 // NOVA ROTA PARA LISTAR TODAS AS MÍDIAS
