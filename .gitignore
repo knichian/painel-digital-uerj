@@ -1,2 +1,7 @@
 .vscode/
-quick_launch.sh
+
+client/node-modules
+
+server/node-modules
+server/server_logs.log
+
