@@ -48,7 +48,7 @@ backendPrefix.use(express.static(path.join(__dirname, 'public')));
 // Diz ao Express para usar nossas rotas de autenticação
 // Todas as rotas definidas em 'auth.js' terão o prefixo '/api/auth'
 // Gabriel: modificando para usar prefixo do projeto
-backendPrefix.get('/', (req, res) => {
+backendPrefix.get('/', (_req, res) => {
     res.json({ message: 'API do Painel UERJ está no ar!' });
 });
 backendPrefix.use('/auth', authRoutes);
