@@ -4,6 +4,7 @@ const { Pool } = require('pg');
 require('dotenv').config();
 
 const bcrypt = require('bcryptjs');
+const { query } = require('../config/db');
 
 async function createDatabase() {
 
@@ -174,17 +175,17 @@ async function hotfixes() {
     const insert_string = `
       INSERT INTO "monitors" 
         ("name", "identifier", "api_key", "created_at")
-        VALUES ('main-monitor', 'hall-01', '', NOW());
+        VALUES ('dummy','','','2026-03-15 10:27:04.894000');
     `;
     await db.query(insert_string);
     
     db.end();
     
     console.log('');
-    console.log("Hotfix bem sucedido!");
+    console.log("Hotfix bem sucedido");
 
   } catch (err) {
-    console.error(`Erro em hofixe: ${err}`)
+    console.error(`Erro em hofixes: ${err}`)
   }
 }
 
