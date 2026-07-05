@@ -1,5 +1,4 @@
 <!doctype html>
-<!-- Gabriel: provavelmente este é um arquivo vestigial, mas não vou deletar ele agora porque não to afim de arriscar quebrar a aplicação por enquanto -->
 <html>
 <head>
   <meta charset="utf-8" />
@@ -63,7 +62,8 @@
 
   <script>
     // --- (Configurações, Constantes... tudo igual) ---
-    const SERVER_BASE_URL = '172.20.129.190:3001'; 
+    // const SERVER_BASE_URL = '172.20.129.190:3001'; 
+    const SERVER_BASE_URL = '/painel-digital-uerj'; 
     const MONITOR_ID = 'hall-01';
     const API_URL = `${SERVER_BASE_URL}/api/playlists/display/${MONITOR_ID}`;
     const POLLING_INTERVAL = 60 * 1000;
@@ -110,7 +110,7 @@
 
         if (item.type === 'image') {
           // Se for IMAGEM, define o background
-          slide.style.backgroundImage = `url(${SERVER_BASE_URL}${item.file_path})`;
+          slide.style.backgroundImage = `url(${SERVER_BASE_URL}/api/${item.file_path})`;
           
           // Se tiver texto, adiciona o overlay
           if (item.text_content) {
